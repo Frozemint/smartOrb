@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3929436021AB268100C15196 /* apiToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3929435F21AB268100C15196 /* apiToken.swift */; };
 		395CA62B21AA7409000C3D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 395CA62A21AA7409000C3D61 /* AppDelegate.swift */; };
 		395CA62D21AA740B000C3D61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 395CA62C21AA740B000C3D61 /* Assets.xcassets */; };
 		395CA63021AA740B000C3D61 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 395CA62E21AA740B000C3D61 /* MainMenu.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		395CA62721AA7409000C3D61 /* test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3929435E21AB25A700C15196 /* smartOrb.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = smartOrb.entitlements; sourceTree = "<group>"; };
+		3929435F21AB268100C15196 /* apiToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = apiToken.swift; sourceTree = "<group>"; };
+		395CA62721AA7409000C3D61 /* smartOrb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smartOrb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		395CA62A21AA7409000C3D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		395CA62C21AA740B000C3D61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		395CA62F21AA740B000C3D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		395CA61E21AA7409000C3D61 = {
 			isa = PBXGroup;
 			children = (
+				3929435E21AB25A700C15196 /* smartOrb.entitlements */,
 				395CA62921AA7409000C3D61 /* test */,
 				395CA62821AA7409000C3D61 /* Products */,
 			);
@@ -43,7 +47,7 @@
 		395CA62821AA7409000C3D61 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				395CA62721AA7409000C3D61 /* test.app */,
+				395CA62721AA7409000C3D61 /* smartOrb.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				395CA62A21AA7409000C3D61 /* AppDelegate.swift */,
+				3929435F21AB268100C15196 /* apiToken.swift */,
 				395CA62C21AA740B000C3D61 /* Assets.xcassets */,
 				395CA62E21AA740B000C3D61 /* MainMenu.xib */,
 				395CA63121AA740B000C3D61 /* Info.plist */,
@@ -63,9 +68,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		395CA62621AA7409000C3D61 /* test */ = {
+		395CA62621AA7409000C3D61 /* smartOrb */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 395CA63521AA740B000C3D61 /* Build configuration list for PBXNativeTarget "test" */;
+			buildConfigurationList = 395CA63521AA740B000C3D61 /* Build configuration list for PBXNativeTarget "smartOrb" */;
 			buildPhases = (
 				395CA62321AA7409000C3D61 /* Sources */,
 				395CA62421AA7409000C3D61 /* Frameworks */,
@@ -75,9 +80,9 @@
 			);
 			dependencies = (
 			);
-			name = test;
+			name = smartOrb;
 			productName = test;
-			productReference = 395CA62721AA7409000C3D61 /* test.app */;
+			productReference = 395CA62721AA7409000C3D61 /* smartOrb.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -92,10 +97,15 @@
 				TargetAttributes = {
 					395CA62621AA7409000C3D61 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
-			buildConfigurationList = 395CA62221AA7409000C3D61 /* Build configuration list for PBXProject "test" */;
+			buildConfigurationList = 395CA62221AA7409000C3D61 /* Build configuration list for PBXProject "smartOrb" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -108,7 +118,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				395CA62621AA7409000C3D61 /* test */,
+				395CA62621AA7409000C3D61 /* smartOrb */,
 			);
 		};
 /* End PBXProject section */
@@ -130,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3929436021AB268100C15196 /* apiToken.swift in Sources */,
 				395CA62B21AA7409000C3D61 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,7 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = test/test.entitlements;
+				CODE_SIGN_ENTITLEMENTS = smartOrb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7F5987MJB4;
@@ -286,7 +297,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = test/test.entitlements;
+				CODE_SIGN_ENTITLEMENTS = smartOrb.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7F5987MJB4;
@@ -304,7 +315,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		395CA62221AA7409000C3D61 /* Build configuration list for PBXProject "test" */ = {
+		395CA62221AA7409000C3D61 /* Build configuration list for PBXProject "smartOrb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				395CA63321AA740B000C3D61 /* Debug */,
@@ -313,7 +324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		395CA63521AA740B000C3D61 /* Build configuration list for PBXNativeTarget "test" */ = {
+		395CA63521AA740B000C3D61 /* Build configuration list for PBXNativeTarget "smartOrb" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				395CA63621AA740B000C3D61 /* Debug */,

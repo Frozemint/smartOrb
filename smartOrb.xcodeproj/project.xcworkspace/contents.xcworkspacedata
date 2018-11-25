@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:test.xcodeproj">
+      location = "self:/Users/nami/Desktop/Rubbish Can/test/smartOrb.xcodeproj">
    </FileRef>
 </Workspace>
