@@ -14,11 +14,16 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="smartOrb" customModuleProvider="target">
             <connections>
                 <outlet property="appStatusMenu" destination="8D4-HU-g9m" id="kAT-eA-w9x"/>
+                <outlet property="brightnessSliderMenuItem" destination="hZV-BQ-Bgn" id="f7S-vG-Yko"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu id="8D4-HU-g9m">
             <items>
+                <menuItem title="Item" id="hZV-BQ-Bgn">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="1ra-dl-3CV"/>
                 <menuItem title="Light On" id="LGS-iu-7FV">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
@@ -29,6 +34,12 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
                         <action selector="statusBarLightOff:" target="Voe-Tx-rLC" id="2d9-eG-YGr"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="9li-88-ISI"/>
+                <menuItem title="Quit" keyEquivalent="q" id="O24-ud-88g">
+                    <connections>
+                        <action selector="terminate:" target="-2" id="8h3-gP-xrn"/>
                     </connections>
                 </menuItem>
             </items>

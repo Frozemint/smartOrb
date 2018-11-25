@@ -14,12 +14,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     @IBOutlet var appStatusMenu: NSMenu!
+    @IBOutlet weak var brightnessSliderMenuItem: NSMenuItem!
+    
     @IBAction func statusBarLightOn(_ sender: Any){
-        switchLightOn()
+        switchLightOn(nil)
     }
     
     @IBAction func statusBarLightOff(_ sender: Any){
-        switchLightOff()
+        switchLightOff(nil)
     }
     
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -33,14 +35,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        systemWakeSleepNotification()
+        systemWakeSleepNotification() //register for system power state change notification
+        
         statusItem.button?.title = "💡"
         statusItem.menu = appStatusMenu
+        
+        let brightnessSlider = NSSlider()
+        brightnessSliderMenuItem.view = brightnessSlider
+        brightnessSlider.setFrameSize(NSSize(width: 160, height: 20))
+
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
-        switchLightOff()
+        print("App quitting, switching light off")
+        switchLightOff(nil) //turn off lights
+        NSWorkspace.shared.notificationCenter.removeObserver(self) //remove all observers
     }
     
     func systemWakeSleepNotification(){
@@ -57,13 +67,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                                                           object: nil)
     }
     
-    @objc func switchLightOff(){
+    @objc func switchLightOff(_ notification: Notification?){
+        if notification != nil{
+            print("System sleeping, turning light off")
+        } else {
+            print("Turning light off by user action")
+        }
         toggleOnOffOfLight(power: "off")
-        print("System sleeping, turning light off")
     }
-    @objc func switchLightOn(){
+    @objc func switchLightOn(_ notification: Notification?){
+        if notification != nil{
+            print("System waking, turning light on")
+        } else {
+            print("Turning light on by user action")
+        }
         toggleOnOffOfLight(power: "on")
-        print("System waking, turnig light on")
     }
 
     func toggleOnOffOfLight(power: String){
