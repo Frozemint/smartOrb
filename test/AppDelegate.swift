@@ -7,11 +7,12 @@
 //
 
 import Cocoa
+import Foundation
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    
+    var lightStatus: Bool?
     
     @IBOutlet var appStatusMenu: NSMenu!
     @IBOutlet weak var brightnessSliderMenuItem: NSMenuItem!
@@ -28,7 +29,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     struct Custom: Codable{
         let power: String?
-        let brightness: Float?
+        let brightness: Double?
         let duration: Float?
         let color: String?
     }
@@ -43,13 +44,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let brightnessSlider = NSSlider()
         brightnessSliderMenuItem.view = brightnessSlider
         brightnessSlider.setFrameSize(NSSize(width: 160, height: 20))
-
+        brightnessSlider.target = self
+        brightnessSlider.isContinuous = false
+        brightnessSlider.action = #selector(onBrightnessSliderChange)
+    }
+    
+    @objc func onBrightnessSliderChange(sender: NSSlider){
+        print(sender.floatValue)
+        changeLightState(power: "on", brightness: sender.doubleValue, duration: nil, color: nil)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
         print("App quitting, switching light off")
-        switchLightOff(nil) //turn off lights
         NSWorkspace.shared.notificationCenter.removeObserver(self) //remove all observers
     }
     
@@ -73,7 +80,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             print("Turning light off by user action")
         }
-        toggleOnOffOfLight(power: "off")
+        changeLightState(power: "off", brightness: nil, duration: 0.5, color: nil)
     }
     @objc func switchLightOn(_ notification: Notification?){
         if notification != nil{
@@ -81,20 +88,21 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             print("Turning light on by user action")
         }
-        toggleOnOffOfLight(power: "on")
+        changeLightState(power: "on", brightness: nil, duration: 0.9, color: nil)
     }
 
-    func toggleOnOffOfLight(power: String){
+    func changeLightState(power: String?, brightness: Double?, duration: Float?, color: String?){
         let endpoint = URL(string: "https://api.lifx.com/v1/lights/all/state")
         var urlRequest = URLRequest(url: endpoint!)
         urlRequest.httpMethod = "PUT"
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("Bearer \(apiToken)", forHTTPHeaderField: "Authorization")
-        let parameters = Custom(power: power, brightness: nil, duration: nil, color: nil)
+        let parameters = Custom(power: power, brightness: brightness, duration: duration, color: color)
         guard let payload = try? JSONEncoder().encode(parameters) else {
-            print("Error")
+            print("Error encoding JSON")
             return
         }
+        print(String(data: payload, encoding: .utf8)!)
         let task = URLSession.shared.uploadTask(with: urlRequest, from: payload) { data, response, error in
             if error != nil {
                 print ("error: \(error!)")
@@ -114,5 +122,32 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         task.resume() //perform the upload task
     }
 
+    
+//    func getLightStatus(){
+//        let endpoint = URL(string: "https://api.lifx.com/v1/lights/all")
+//        var urlRequest = URLRequest(url: endpoint!)
+//        urlRequest.httpMethod = "GET"
+////        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        urlRequest.setValue("Bearer \(apiToken)", forHTTPHeaderField: "Authorization")
+//        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest, completionHandler: { data, response, error in
+//            guard error == nil else {
+//                return
+//            }
+//            guard let data = data else {
+//                return
+//            }
+//            let first = data.first
+//            let dataString = String(data: first, encoding: .utf8)
+//            print(dataString!)
+////            print(dataString!)
+////            let decoder = JSONDecoder()
+////            let user = try! decoder.decode(Custom.self, from: data)
+////            print(user.power!)
+//        })
+//
+//        task.resume()
+//    }
+
+//}
 }
 
