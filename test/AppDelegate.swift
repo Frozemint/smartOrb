@@ -50,7 +50,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @objc func onBrightnessSliderChange(sender: NSSlider){
-        print(sender.floatValue)
+//        print(sender.floatValue)
         changeLightState(power: "on", brightness: sender.doubleValue, duration: nil, color: nil)
     }
 
@@ -102,7 +102,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             print("Error encoding JSON")
             return
         }
-        print(String(data: payload, encoding: .utf8)!)
+//        print(String(data: payload, encoding: .utf8)!)
         let task = URLSession.shared.uploadTask(with: urlRequest, from: payload) { data, response, error in
             if error != nil {
                 print ("error: \(error!)")
